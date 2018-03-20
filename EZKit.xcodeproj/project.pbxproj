@@ -62,15 +62,8 @@
 			isa = PBXGroup;
 			children = (
 				5248C0872060ACF900132346 /* EZTimer */,
-				5248C071205A6C8A00132346 /* AppDelegate.h */,
-				5248C072205A6C8A00132346 /* AppDelegate.m */,
-				5248C074205A6C8A00132346 /* ViewController.h */,
-				5248C075205A6C8A00132346 /* ViewController.m */,
-				5248C077205A6C8A00132346 /* Main.storyboard */,
+				52B5020F20611CE90062043F /* Others */,
 				5248C07A205A6C8A00132346 /* Assets.xcassets */,
-				5248C07C205A6C8A00132346 /* LaunchScreen.storyboard */,
-				5248C07F205A6C8A00132346 /* Info.plist */,
-				5248C080205A6C8A00132346 /* main.m */,
 			);
 			path = EZKit;
 			sourceTree = "<group>";
@@ -82,6 +75,21 @@
 				5248C0892060AD2D00132346 /* EZTimer.m */,
 			);
 			path = EZTimer;
+			sourceTree = "<group>";
+		};
+		52B5020F20611CE90062043F /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				5248C07F205A6C8A00132346 /* Info.plist */,
+				5248C07C205A6C8A00132346 /* LaunchScreen.storyboard */,
+				5248C071205A6C8A00132346 /* AppDelegate.h */,
+				5248C072205A6C8A00132346 /* AppDelegate.m */,
+				5248C074205A6C8A00132346 /* ViewController.h */,
+				5248C075205A6C8A00132346 /* ViewController.m */,
+				5248C077205A6C8A00132346 /* Main.storyboard */,
+				5248C080205A6C8A00132346 /* main.m */,
+			);
+			path = Others;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
