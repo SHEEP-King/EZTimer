@@ -13,6 +13,7 @@
 		5248C07B205A6C8A00132346 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5248C07A205A6C8A00132346 /* Assets.xcassets */; };
 		5248C07E205A6C8A00132346 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5248C07C205A6C8A00132346 /* LaunchScreen.storyboard */; };
 		5248C081205A6C8A00132346 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5248C080205A6C8A00132346 /* main.m */; };
+		5248C08A2060AD2D00132346 /* EZTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5248C0892060AD2D00132346 /* EZTimer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		5248C07D205A6C8A00132346 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5248C07F205A6C8A00132346 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5248C080205A6C8A00132346 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5248C0882060AD2D00132346 /* EZTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EZTimer.h; sourceTree = "<group>"; };
+		5248C0892060AD2D00132346 /* EZTimer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZTimer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,7 @@
 		5248C070205A6C8A00132346 /* EZKit */ = {
 			isa = PBXGroup;
 			children = (
+				5248C0872060ACF900132346 /* EZTimer */,
 				5248C071205A6C8A00132346 /* AppDelegate.h */,
 				5248C072205A6C8A00132346 /* AppDelegate.m */,
 				5248C074205A6C8A00132346 /* ViewController.h */,
@@ -69,6 +73,15 @@
 				5248C080205A6C8A00132346 /* main.m */,
 			);
 			path = EZKit;
+			sourceTree = "<group>";
+		};
+		5248C0872060ACF900132346 /* EZTimer */ = {
+			isa = PBXGroup;
+			children = (
+				5248C0882060AD2D00132346 /* EZTimer.h */,
+				5248C0892060AD2D00132346 /* EZTimer.m */,
+			);
+			path = EZTimer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5248C08A2060AD2D00132346 /* EZTimer.m in Sources */,
 				5248C076205A6C8A00132346 /* ViewController.m in Sources */,
 				5248C081205A6C8A00132346 /* main.m in Sources */,
 				5248C073205A6C8A00132346 /* AppDelegate.m in Sources */,
