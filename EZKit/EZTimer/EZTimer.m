@@ -36,6 +36,7 @@
     [self timer:timerName timerInterval:interval leeway:EZTimerDfaultLeeway resumeType:resumeType queue:EZTimerQueueTypeGlobal queueName:nil repeats:YES action:action];
 }
 
+
 -(void)timer:(NSString*)timerName timerInterval:(double)interval leeway:(double)leeway resumeType:(EZTimerResumeType)resumeType queue:(EZTimerQueueType)queue queueName:(NSString *)queueName repeats:(BOOL)repeats action:(EZTimerBlock)action{
     
     dispatch_queue_t que = nil;
@@ -63,7 +64,7 @@
         [self.timers setObject:timer forKey:timerName];
     }
     
-    dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, (interval==0?EZTimerDfaultTimeInterval:interval) * NSEC_PER_SEC, (leeway == 0 ? EZTimerDfaultLeeway:leeway) * NSEC_PER_SEC);
+    dispatch_source_set_timer(timer, dispatch_walltime(NULL, 0), (interval==0?EZTimerDfaultTimeInterval:interval) * NSEC_PER_SEC, (leeway == 0 ? EZTimerDfaultLeeway:leeway) * NSEC_PER_SEC);
 
     dispatch_source_set_event_handler(timer, ^{
         action(timerName);

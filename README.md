@@ -27,11 +27,17 @@ v0.0.1
 -(void)cancel:(NSString *)timerName;
 /**
  * 暂停此timer
+ * 暂停及恢复的操作不建议使用，这两个操作需配对使用，
+ * 不然会出现崩溃，原因是source未提供检测状态的接口
  * timerName timer名称
  */
 -(void)pause:(NSString *)timerName;
 /**
  * 恢复此timer
+ * 暂停及恢复的操作不建议使用，这两个操作需配对使用，
+ * 不然会出现崩溃，原因是source未提供检测状态的接口
  * timerName timer名称
  */
 -(void)resume:(NSString *)timerName;
+
+

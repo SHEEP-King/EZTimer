@@ -64,6 +64,7 @@
 				5248C0872060ACF900132346 /* EZTimer */,
 				52B5020F20611CE90062043F /* Others */,
 				5248C07A205A6C8A00132346 /* Assets.xcassets */,
+				5248C07F205A6C8A00132346 /* Info.plist */,
 			);
 			path = EZKit;
 			sourceTree = "<group>";
@@ -80,7 +81,6 @@
 		52B5020F20611CE90062043F /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				5248C07F205A6C8A00132346 /* Info.plist */,
 				5248C07C205A6C8A00132346 /* LaunchScreen.storyboard */,
 				5248C071205A6C8A00132346 /* AppDelegate.h */,
 				5248C072205A6C8A00132346 /* AppDelegate.m */,
