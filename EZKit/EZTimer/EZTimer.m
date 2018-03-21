@@ -14,9 +14,20 @@
 
 #define EZTimerDfaultTimeInterval 60
 
+#define EZTIMERSTATUSKEY_RESUME @"EZTIMERSTATUSKEY_RESUME"
+#define EZTIMERSTATUSKEY_PAUSE  @"EZTIMERSTATUSKEY_PAUSE"
+
+#ifdef DEBUG
+    #define EZLog(...) NSLog(__VA_ARGS__)
+#else
+    #define EZLog(...)
+#endif
+
 @interface EZTimer()
 
 @property(nonatomic,strong)NSMutableDictionary *timers;
+
+@property(nonatomic,strong)NSMutableDictionary *timersFlags;
 
 @end
 
@@ -31,6 +42,7 @@
     
     return instance;
 }
+
 
 -(void)repeatTimer:(NSString*)timerName timerInterval:(double)interval resumeType:(EZTimerResumeType)resumeType action:(EZTimerBlock)action{
     [self timer:timerName timerInterval:interval leeway:EZTimerDfaultLeeway resumeType:resumeType queue:EZTimerQueueTypeGlobal queueName:nil repeats:YES action:action];
@@ -62,45 +74,73 @@
     if (!timer) {
         timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, que);
         [self.timers setObject:timer forKey:timerName];
+        //timer 状态标识
+        NSMutableDictionary *dic =[NSMutableDictionary dictionaryWithObjectsAndKeys:@0,EZTIMERSTATUSKEY_RESUME,@0,EZTIMERSTATUSKEY_PAUSE, nil];
+        [self.timersFlags setObject:dic forKey:timerName];
     }
     
     dispatch_source_set_timer(timer, dispatch_walltime(NULL, 0), (interval==0?EZTimerDfaultTimeInterval:interval) * NSEC_PER_SEC, (leeway == 0 ? EZTimerDfaultLeeway:leeway) * NSEC_PER_SEC);
 
     dispatch_source_set_event_handler(timer, ^{
+        EZLog(@"tiemr action");
         action(timerName);
         if (!repeats) {
-            dispatch_source_cancel(timer);
+            //dispatch_source_cancel(timer);
+            [self cancel:timerName];
+            EZLog(@"tiemr action once");
         }
-        NSLog(@"tiemr action");
     });
     if (resumeType == EZTimerResumeTypeNow) {
-        dispatch_resume(timer);
+        //dispatch_resume(timer);
+        [self resume:timerName];
     }else{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(interval * NSEC_PER_SEC)), que, ^{
-            dispatch_resume(timer);
+            //dispatch_resume(timer);
+            [self resume:timerName];
         });
     }
 }
 
+
+//当 timer 处于 suspend状态时不能被 释放.
 -(void)cancel:(NSString *)timerName{
+    
     dispatch_source_t timer = [self.timers objectForKey:timerName];
     //NSAssert(timer, @"%s\n定时器列表中不存在此名称的timer -- %@",__func__,timerName);
     if (!timer) {
+        EZLog(@"tiemr cancel retrun - because timer had been cancel");
         return;
     }
+    NSMutableDictionary *timerDic = [self.timersFlags objectForKey:timerName];
+    if (timerDic && [timerDic[EZTIMERSTATUSKEY_PAUSE] boolValue]) {
+        EZLog(@"timer had paused，resume first then cancel it");
+        dispatch_resume(timer);
+        dispatch_source_cancel(timer);
+    }
     [self.timers removeObjectForKey:timerName];
-    dispatch_source_cancel(timer);
-    NSLog(@"tiemr action - cancel");
+    [self.timersFlags removeObjectForKey:timerName];
+    
+    EZLog(@"tiemr cancel - cancel");
+    
 }
 
 -(void)pause:(NSString *)timerName{
+
     dispatch_source_t timer = [self.timers objectForKey:timerName];
     //NSAssert(timer, @"%s\n定时器列表中不存在此名称的timer -- %@",__func__,timerName);
     if (!timer) {
         return;
     }
+    NSMutableDictionary *timerDic = [self.timersFlags objectForKey:timerName];
+    if (timerDic && [timerDic[EZTIMERSTATUSKEY_PAUSE] boolValue]) {
+        EZLog(@"tiemr pause return- because timer had paused");
+        return ;
+    }
     dispatch_suspend(timer);
-    NSLog(@"tiemr action - pause" );
+    timerDic[EZTIMERSTATUSKEY_PAUSE] = @1;
+    timerDic[EZTIMERSTATUSKEY_RESUME] = @0;
+    EZLog(@"tiemr pause - paused" );
+    
 }
 
 -(void)resume:(NSString *)timerName{
@@ -109,8 +149,16 @@
     if (!timer) {
         return;
     }
+    NSMutableDictionary *timerDic = [self.timersFlags objectForKey:timerName];
+    if (timerDic && [timerDic[EZTIMERSTATUSKEY_RESUME] boolValue]) {
+        EZLog(@"timer resuem return - because timer had resume");
+        return;
+    }
     dispatch_resume(timer);
-    NSLog(@"tiemr action - resume");
+    timerDic[EZTIMERSTATUSKEY_RESUME] = @1;
+    timerDic[EZTIMERSTATUSKEY_PAUSE] = @0;
+    EZLog(@"tiemr resume - resumed");
+
 }
 
 -(NSMutableDictionary *)timers{
@@ -118,6 +166,13 @@
         _timers = [NSMutableDictionary dictionary];
     }
     return _timers;
+}
+
+-(NSMutableDictionary *)timersFlags{
+    if (!_timersFlags) {
+        _timersFlags = [NSMutableDictionary dictionary];
+    }
+    return _timersFlags;
 }
 
 @end
