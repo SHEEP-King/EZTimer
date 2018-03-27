@@ -81,12 +81,13 @@
     
     dispatch_source_set_timer(timer, dispatch_walltime(NULL, 0), (interval==0?EZTimerDfaultTimeInterval:interval) * NSEC_PER_SEC, (leeway == 0 ? EZTimerDfaultLeeway:leeway) * NSEC_PER_SEC);
 
+    __weak typeof(self) weakSelf = self;
     dispatch_source_set_event_handler(timer, ^{
         EZLog(@"tiemr action");
         action(timerName);
         if (!repeats) {
             //dispatch_source_cancel(timer);
-            [self cancel:timerName];
+            [weakSelf cancel:timerName];
             EZLog(@"tiemr action once");
         }
     });
@@ -96,7 +97,7 @@
     }else{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(interval * NSEC_PER_SEC)), que, ^{
             //dispatch_resume(timer);
-            [self resume:timerName];
+            [weakSelf resume:timerName];
         });
     }
 }
