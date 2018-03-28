@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "EZTimer"
+  s.name         = "GCDTimer"
   s.version      = "v0.0.2"
   s.summary      = "A timer by GCD."
 
