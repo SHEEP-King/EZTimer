@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "GCDTimer"
+  s.name         = "EZTimer"
   s.version      = "0.0.2"
   s.summary      = "A timer by GCD."
 
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
 			a timer by GCD,never mind resume pause and cancel.
                    DESC
 
-  s.homepage     = "https://github.com/SHEEP-King/GCDTimer"
+  s.homepage     = "https://github.com/SHEEP-King/EZTimer"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/SHEEP-King/GCDTimer.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/SHEEP-King/EZTimer.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
