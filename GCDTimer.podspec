@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "GCDTimer"
-  s.version      = "v0.0.2"
+  s.version      = "0.0.2"
   s.summary      = "A timer by GCD."
 
   # This description is used to generate tags and improve search results.
@@ -24,7 +24,8 @@ Pod::Spec.new do |s|
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  s.description  = <<-DESC a timer by GCD,never mind resume pause and cancel.
+  s.description  = <<-DESC 
+			a timer by GCD,never mind resume pause and cancel.
                    DESC
 
   s.homepage     = "https://github.com/SHEEP-King/GCDTimer"
@@ -90,7 +91,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "EZKit/EZTimer/*.{h,m}”
+s.source_files  = 'EZKit/EZTimer/*.{h,m}'
   #s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
