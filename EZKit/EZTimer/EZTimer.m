@@ -116,13 +116,12 @@
     if (timerDic && [timerDic[EZTIMERSTATUSKEY_PAUSE] boolValue]) {
         EZLog(@"timer had paused，resume first then cancel it");
         dispatch_resume(timer);
-        dispatch_source_cancel(timer);
     }
+    dispatch_source_cancel(timer);
     [self.timers removeObjectForKey:timerName];
     [self.timersFlags removeObjectForKey:timerName];
     
     EZLog(@"tiemr cancel - cancel");
-    
 }
 
 -(void)pause:(NSString *)timerName{
