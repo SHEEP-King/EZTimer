@@ -7,6 +7,8 @@ v0.0.2
 题，使用更加方便简单。
 v0.0.3
 增加pod
+v0.0.4
+修复EZTimer cancel 方法bug
 
 pod 'EZTimer'
 
